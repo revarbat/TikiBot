@@ -4,7 +4,7 @@ import yaml
 import platform
 import operator
 
-from Adafruit_MotorShieldV2 import Adafruit_MotorShield, FORWARD, BACKWARD, RELEASE
+from Adafruit_MotorHAT import Adafruit_MotorHAT as AFMH
 from Adafruit_GPIO.I2C import get_i2c_device
 
 
@@ -16,7 +16,7 @@ def eprint(*args, **kwargs):
 
 
 class SupplyFeed(object):
-    motor_shields = {}
+    motor_controllers = {}
     dc_motors = {}
     max_motor_num = 0
     feed_order = []
@@ -66,14 +66,14 @@ class SupplyFeed(object):
     def getMotorByNumber(cls, motor_num):
         addr = 0x60 + motor_num // 4
         num = motor_num % 4
-        if addr not in cls.motor_shields:
+        if addr not in cls.motor_controllers:
             busnum = 0
             if platform.system() == "Linux":
                 if "udooneo" in platform.release():
                     busnum = 1
-            cls.motor_shields[addr] = Adafruit_MotorShield(addr, busnum=busnum)
+            cls.motor_controllers[addr] = AFMH(addr, busnum=busnum)
         if motor_num not in cls.dc_motors:
-            cls.dc_motors[motor_num] = cls.motor_shields[addr].getMotor(num + 1)
+            cls.dc_motors[motor_num] = cls.motor_controllers[addr].getMotor(num + 1)
         return cls.dc_motors[motor_num]
 
     @classmethod
@@ -115,7 +115,7 @@ class SupplyFeed(object):
             if self.motor is None:
                 self.motor = SupplyFeed.getMotorByNumber(self.motor_num)
             self.motor.setSpeed(255)
-            self.motor.run(FORWARD)
+            self.motor.run(AFMH.FORWARD)
             self.flowing = True
         else:
             eprint("Starting feed %d @%f" % (self.motor_num, time.time() - progstart_time))
@@ -126,7 +126,7 @@ class SupplyFeed(object):
             if self.motor is None:
                 self.motor = SupplyFeed.getMotorByNumber(self.motor_num)
             self.motor.setSpeed(0)
-            self.motor.run(RELEASE)
+            self.motor.run(AFMH.RELEASE)
             self.flowing = False
         else:
             eprint("STOPPING feed %d @%f" % (self.motor_num, time.time() - progstart_time))

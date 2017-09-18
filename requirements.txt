@@ -1,0 +1,10 @@
+Adafruit-GPIO==1.0.3
+Adafruit-MotorHAT==1.4.0
+Adafruit-PCA9685==1.0.1
+Adafruit-PureIO==0.2.1
+packaging==16.8
+Pillow==4.0.0
+PyYAML==3.12
+six==1.10.0
+virtualenv==15.1.0
+
