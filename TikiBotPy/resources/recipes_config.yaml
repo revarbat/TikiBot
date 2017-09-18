@@ -51,12 +51,6 @@ recipes:
   name: Shrunken Skull
   type: Tiki Drinks
 - ingredients:
-  - [Meyer's Silver Rum, 2.0, oz]
-  - [Orange Juice, 2.0, oz]
-  - [Grenadine, 0.5, oz]
-  name: Sunset Rose
-  type: Cocktails
-- ingredients:
   - [Appleton's Gold Rum, 0.5, oz]
   - [Meyer's Silver Rum, 0.5, oz]
   - [Lemonheart 151 Rum, 0.5, oz]
