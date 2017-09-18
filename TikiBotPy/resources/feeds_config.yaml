@@ -1,0 +1,12 @@
+- {available: true, flowrate: 12.8, name: Meyer's Dark Rum, overage: 0.04, type: Rums}
+- {available: true, flowrate: 12.8, name: Appleton's Gold Rum, overage: 0.04, type: Rums}
+- {available: true, flowrate: 12.8, name: Meyer's Silver Rum, overage: 0.04, type: Rums}
+- {available: true, flowrate: 12.8, name: Lemonheart 151 Rum, overage: 0.04, type: Rums}
+- {available: true, flowrate: 12.8, name: Lime Juice, overage: 0.04, type: Juices}
+- {available: true, flowrate: 12.8, name: Lemon Juice, overage: 0.04, type: Juices}
+- {available: true, flowrate: 12.8, name: Orange Juice, overage: 0.04, type: Juices}
+- {available: true, flowrate: 12.8, name: Pineapple Juice, overage: 0.04, type: Juices}
+- {available: true, flowrate: 12.8, name: Passion Fruit Syrup, overage: 0.04, type: Flavorings}
+- {available: true, flowrate: 13.3, name: Sugar Syrup, overage: 0.02, type: Flavorings}
+- {available: true, flowrate: 7.8, name: Angostura Bitters, overage: 0.2, type: Flavorings}
+- {available: true, flowrate: 13.2, name: Grenadine, overage: 0.03, type: Flavorings}
