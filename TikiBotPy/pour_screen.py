@@ -39,7 +39,7 @@ class PourScreen(Frame):
         self.grid_rowconfigure(7, weight=1)
         self.grid_rowconfigure(8, minsize=20)
 
-        self.set_amount(6)
+        self.set_amount(int(recipe.totalVolume()/OZ+0.5))
 
     def get_amount(self):
         return int(self.selbtn.cget('text').split()[1])
