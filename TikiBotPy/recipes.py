@@ -192,9 +192,10 @@ class Recipe(object):
         Recipe.recipes[name] = self
         for ingr_data in ingredients:
             ingr = Ingredient.fromArray(ingr_data)
-            if ingr.feed.getName() not in Recipe.by_feed:
-                Recipe.by_feed[ingr.feed.getName()] = []
-            Recipe.by_feed[ingr.feed.getName()].append(self)
+            feedname = ingr.feed.getName()
+            if feedname not in Recipe.by_feed:
+                Recipe.by_feed[feedname] = []
+            Recipe.by_feed[feedname].append(self)
             self.ingredients.append(ingr)
 
     @classmethod
@@ -276,6 +277,17 @@ class Recipe(object):
 
     def getIcon(self):
         return self.icon
+
+    def delete_recipe(self):
+        del Recipe.recipes[self.name]
+        Recipe.recipe_types[self.type_].remove(self)
+        if not Recipe.recipe_types[self.type_]:
+            del Recipe.recipe_types[self.type_]
+        for ingr in self.ingredients:
+            feedname = ingr.feed.getName()
+            Recipe.by_feed[feedname].remove(self)
+            if not Recipe.by_feed[feedname]:
+                del Recipe.by_feed[feedname]
 
     def rename(self, newname):
         del Recipe.recipes[self.name]

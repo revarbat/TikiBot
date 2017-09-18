@@ -23,6 +23,7 @@ class RecipeEditScreen(Frame):
         self.upbtn = RectButton(self, text="\u25b2", state=DISABLED, repeatdelay=500, repeatinterval=100, command=self.handle_button_up)
         self.ingrlb = Listbox(self, width=40, height=5)
         self.dnbtn = RectButton(self, text="\u25bc", state=DISABLED, repeatdelay=500, repeatinterval=100, command=self.handle_button_dn)
+        self.recipedel = RectButton(self, text="Delete Recipe", width=150, command=self.handle_button_recipe_del)
         self.ingradd = RectButton(self, text="\u2795", width=80, command=self.handle_button_ingr_add)
         self.ingrdel = RectButton(self, text="\u2796", width=80, command=self.handle_button_ingr_del)
         self.ingramt = RectButton(self, text="\u270e", width=80, command=self.handle_button_ingr_amt)
@@ -34,6 +35,7 @@ class RecipeEditScreen(Frame):
         self.upbtn.grid(column=1, row=3, pady=0, sticky=S+E+W)
         self.ingrlb.grid(column=1, row=4, rowspan=5, pady=10, sticky=N+S+E+W)
         self.dnbtn.grid(column=1, row=9, pady=0, sticky=N+E+W)
+        self.recipedel.grid(column=3, row=3, pady=0, sticky=N+E)
         self.ingradd.grid(column=3, row=4, pady=10, sticky=N+W)
         self.ingrdel.grid(column=3, row=5, pady=0, sticky=N+W)
         self.ingramt.grid(column=3, row=6, pady=10, sticky=N+W)
@@ -56,6 +58,16 @@ class RecipeEditScreen(Frame):
 
     def handle_button_retype(self):
         self.master.screen_push(SelectScreen(self.master, Recipe.getPossibleTypeNames(), labeltext="Select the recipe type:", callback=self.retype_complete))
+
+    def handle_button_recipe_del(self):
+        self.master.screen_push(SelectScreen(self.master, ["Confirm"], labeltext="Are you sure you want to delete this recipe?", callback=self.recipe_delete_complete))
+
+    def recipe_delete_complete(self, confirm):
+        if confirm == "Confirm":
+            self.recipe.delete_recipe()
+            self.master.save_configs()
+            self.master.screen_pop()
+        self.master.screen_pop()
 
     def update_scroll_btns(self):
         start, end = self.ingrlb.yview()
