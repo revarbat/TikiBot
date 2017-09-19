@@ -71,7 +71,7 @@ class SupplyFeed(object):
             if platform.system() == "Linux":
                 if "udooneo" in platform.release():
                     busnum = 1
-            cls.motor_controllers[addr] = AFMH(addr, busnum=busnum)
+            cls.motor_controllers[addr] = AFMH(addr, i2c_bus=busnum)
         if motor_num not in cls.dc_motors:
             cls.dc_motors[motor_num] = cls.motor_controllers[addr].getMotor(num + 1)
         return cls.dc_motors[motor_num]
