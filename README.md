@@ -3,6 +3,28 @@ TikiBot
 Touchscreen BarBot software for auto-dispensing mixed drinks.
 
 
+Hardware
+--------
+This software has been tested with the following hardware:
+
+- Udoo Neo ( [source](https://www.udoo.org) )
+- 7" 800x480 Touchscreen HDMI display
+- 3 Adafruit DC Motor Featherwings ( [source](https://www.adafruit.com/product/2927) )
+- 12 Small self-priming pumps ( [source](http://www.trossenrobotics.com/robotgeek-pump-small) )
+- 12 Normally Closed solonoid valves ( [source](https://www.amazon.com/dp/B007D1U64E/ref=cm_sw_r_tw_dp_x_qDVWzbPCEW4K5) )
+
+Each feed is a paired pump and valve, wired in parallel.  Each
+DC Motor Featherwing controls up to 4 feeds.  You can alternately
+use the following DC motor controllers without changing any code:
+
+- Adafruit DC & Stepper Motor HAT for Raspberry Pi ( [source](https://www.adafruit.com/product/2348) )
+- Adafruit Motor/Stepper/Servo Shield for Arduino v2 ( [source](https://www.adafruit.com/product/1438) )
+
+It should be trivial to use a Raspberry Pi instead of the Udoo Neo.
+Probably the easiest configuration would be to use a Raspberry Pi
+with a few stacked DC Motor HATs.
+
+
 Configuration Files
 -------------------
 `feeds_config.yaml`: Configurations for the feed supply lines.
