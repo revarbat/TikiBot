@@ -13,9 +13,8 @@ This software has been tested with the following hardware:
 - 12 Small self-priming pumps ( [source](http://www.trossenrobotics.com/robotgeek-pump-small) )
 - 12 Normally Closed solonoid valves ( [source](https://www.amazon.com/dp/B007D1U64E/ref=cm_sw_r_tw_dp_x_qDVWzbPCEW4K5) )
 
-Each feed is a paired pump and valve, wired in parallel.  Each
-DC Motor Featherwing controls up to 4 feeds.  You can alternately
-use the following DC motor controllers without changing any code:
+Each DC Motor controller handles up to 4 feeds.  You can alternately use
+the following DC motor controllers without changing any code:
 
 - Adafruit DC & Stepper Motor HAT for Raspberry Pi ( [source](https://www.adafruit.com/product/2348) )
 - Adafruit Motor/Stepper/Servo Shield for Arduino v2 ( [source](https://www.adafruit.com/product/1438) )
@@ -23,6 +22,11 @@ use the following DC motor controllers without changing any code:
 It should be trivial to use a Raspberry Pi instead of the Udoo Neo.
 Probably the easiest configuration would be to use a Raspberry Pi
 with a few stacked DC Motor HATs.
+
+Each feed is a paired pump and valve, wired in parallel.
+Each pump/valve combo should be wired and plumbed as follows:
+
+![Pump/Valve wiring](imgsrcs/PumpValveWiring.png)
 
 
 Configuration Files

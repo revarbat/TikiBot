@@ -1,0 +1,29 @@
+<tkcad formatversion="1.1" units="inches" showfractions="YES" material="Aluminum">
+<!-- Units attribute above is for remembering preferred display mode.  All units below are actually in inches. -->
+  <layer name="Layer 1" color="black" cutbit="0" cutdepth="0.0">
+    <cadobject type="RECTANGLE" coords="1.5 2.0 2.5 0.75" fillcolor="#ccccff" linecolor="black" linewidth="0.0050" linedash="solid" cutbit="inherit" cutdepth="0.0000" />
+    <cadobject type="RECTANGLE" coords="1.90625 2.0 2.09375 2.1875" fillcolor="#ccccff" linecolor="black" linewidth="0.0050" linedash="solid" cutbit="inherit" cutdepth="0.0000" />
+    <cadobject type="RECTANGLE" coords="1.5625 2.0 1.75 2.1875" fillcolor="#ccccff" linecolor="black" linewidth="0.0050" linedash="solid" cutbit="inherit" cutdepth="0.0000" />
+    <cadobject type="RECTANGLE" coords="2.75 2.0 3.625 1.1875" fillcolor="#ccccff" linecolor="black" linewidth="0.0050" linedash="solid" cutbit="inherit" cutdepth="0.0000" />
+    <cadobject type="RECTANGLE" coords="3.09375 2.1875 3.28125 2.375" fillcolor="#ccccff" linecolor="black" linewidth="0.0050" linedash="solid" cutbit="inherit" cutdepth="0.0000" />
+    <cadobject type="RECTANGLE" coords="3.09375 2.0 3.625 2.1875" fillcolor="#ccccff" linecolor="black" linewidth="0.0050" linedash="solid" cutbit="inherit" cutdepth="0.0000" />
+    <cadobject type="RECTANGLE" coords="3.625 2.0 3.8125 2.1875" fillcolor="#ccccff" linecolor="black" linewidth="0.0050" linedash="solid" cutbit="inherit" cutdepth="0.0000" />
+    <cadobject type="RECTANGLE" coords="2.875 1.1875 3.0 0.9375" fillcolor="#cccccc" linecolor="black" linewidth="0.0050" linedash="solid" cutbit="inherit" cutdepth="0.0000" />
+    <cadobject type="RECTANGLE" coords="3.4375 1.1875 3.5625 0.9375" fillcolor="#cccccc" linecolor="black" linewidth="0.0050" linedash="solid" cutbit="inherit" cutdepth="0.0000" />
+    <cadobject type="TEXT" coords="2.0 1.4375" rot="0.0" font="Times 12" text="Pump" justify="center" fillcolor="none" linecolor="black" linewidth="0.0050" linedash="solid" cutbit="inherit" cutdepth="0.0000" />
+    <cadobject type="TEXT" coords="3.1875 1.4375" rot="0.0" font="Times 12" text="Valve" justify="center" fillcolor="none" linecolor="black" linewidth="0.0050" linedash="solid" cutbit="inherit" cutdepth="0.0000" />
+    <cadobject type="RECTANGLE" coords="1.625 0.75 1.75 0.6875" fillcolor="#cccccc" linecolor="black" linewidth="0.0050" linedash="solid" cutbit="inherit" cutdepth="0.0000" />
+    <cadobject type="RECTANGLE" coords="2.25 0.75 2.375 0.6875" fillcolor="#cccccc" linecolor="black" linewidth="0.0050" linedash="solid" cutbit="inherit" cutdepth="0.0000" />
+    <cadobject type="LINE" coords="2.3125 0.6875 2.3125 0.25 3.5 0.25 3.5 0.9375" fillcolor="none" linecolor="black" linewidth="0.0050" linedash="solid" cutbit="inherit" cutdepth="0.0000" />
+    <cadobject type="LINE" coords="1.6875 0.6875 1.6875 0.375 2.9375 0.375 2.9375 0.9375" fillcolor="none" linecolor="black" linewidth="0.0050" linedash="solid" cutbit="inherit" cutdepth="0.0000" />
+    <cadobject type="LINE" coords="1.6875 0.375 0.0 0.375" fillcolor="none" linecolor="black" linewidth="0.0050" linedash="solid" cutbit="inherit" cutdepth="0.0000" />
+    <cadobject type="LINE" coords="2.3125 0.25 0.0 0.25" fillcolor="none" linecolor="black" linewidth="0.0050" linedash="solid" cutbit="inherit" cutdepth="0.0000" />
+    <cadobject type="CIRCLECTR" coords="2.3125 0.25 2.3125 0.23438" fillcolor="#000000" linecolor="black" linewidth="0.0050" linedash="solid" cutbit="inherit" cutdepth="0.0000" />
+    <cadobject type="CIRCLECTR" coords="1.6875 0.375 1.6875 0.35938" fillcolor="#000000" linecolor="black" linewidth="0.0050" linedash="solid" cutbit="inherit" cutdepth="0.0000" />
+    <cadobject type="TEXT" coords="2.0 1.6875" rot="0.0" font="Times 12" text="12v" justify="center" fillcolor="#000000" linecolor="black" linewidth="0.0050" linedash="solid" cutbit="inherit" cutdepth="0.0000" />
+    <cadobject type="TEXT" coords="3.1875 1.6875" rot="0.0" font="Times 12" text="12v" justify="center" fillcolor="#000000" linecolor="black" linewidth="0.0050" linedash="solid" cutbit="inherit" cutdepth="0.0000" />
+    <cadobject type="BEZIER" coords="1.75 2.1875 1.6875 2.1875 1.625 2.1875 1.5625 2.1875 1.5625 2.375 1.5625 2.5 1.5625 2.75 1.5625 3.0 1.37245 3.03082 1.1875 3.0 0.8125 2.9375 0.41667 2.64583 0.0 2.5625 0.03125 2.64062 -0.04688 2.6875 0.0 2.75 0.41667 2.83333 0.8125 3.125 1.25 3.1875 1.62123 3.24053 1.75 3.0 1.75 2.75 1.75 2.5 1.75 2.375 1.75 2.1875" fillcolor="#99ccff" linecolor="black" linewidth="0.0050" linedash="solid" cutbit="inherit" cutdepth="0.0000" />
+    <cadobject type="BEZIER" coords="2.09375 2.1875 2.02083 2.1875 1.97917 2.1875 1.90625 2.1875 1.90625 3.125 3.28125 3.0 3.28125 2.375 3.21875 2.375 3.15625 2.375 3.09375 2.375 3.09375 2.75 2.09375 2.875 2.09375 2.1875" fillcolor="#99ccff" linecolor="black" linewidth="0.0050" linedash="solid" cutbit="inherit" cutdepth="0.0000" />
+    <cadobject type="BEZIER" coords="3.8125 2.1875 3.8125 2.125 3.8125 2.0625 3.8125 2.0 3.84994 2.0 3.88726 1.99579 3.92376 1.98746 3.96026 1.97913 3.99571 1.96673 4.02944 1.95048 4.06317 1.93424 4.09497 1.91426 4.12424 1.89092 4.15352 1.86757 4.18007 1.84102 4.20342 1.81174 4.22676 1.78247 4.24674 1.75067 4.26298 1.71694 4.27923 1.68321 4.29163 1.64776 4.29996 1.61126 4.30829 1.57476 4.3125 1.53744 4.3125 1.5 4.375 1.5 4.4375 1.5 4.5 1.5 4.5 1.55148 4.49422 1.60279 4.48276 1.65298 4.47131 1.70317 4.45425 1.75191 4.43192 1.7983 4.40958 1.84468 4.38211 1.8884 4.35001 1.92865 4.31791 1.9689 4.2814 2.00541 4.24115 2.03751 4.2009 2.06961 4.15718 2.09708 4.1108 2.11942 4.06441 2.14175 4.01567 2.15881 3.96548 2.17026 3.91529 2.18172 3.86398 2.1875 3.8125 2.1875" fillcolor="#99ccff" linecolor="black" linewidth="0.0050" linedash="solid" cutbit="inherit" cutdepth="0.0000" />
+  </layer>
+</tkcad>
