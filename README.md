@@ -36,9 +36,14 @@ action with the valve open.
 
 Configuration Files
 -------------------
+`misc_config.yaml`: Miscellaneous configurations like passcode.
+
 `feeds_config.yaml`: Configurations for the feed supply lines.
 
 `recipes_config.yaml`: Recipes and their ingredients.
+
+The default passcode to access the configuration screen is '8888'.  You can 
+and should change that with the "Change Passcode" button in the config menu.
 
 
 Code Entrypoint

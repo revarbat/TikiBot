@@ -7,6 +7,7 @@ except ImportError:  # Python 3
 
 import os
 import sys
+import yaml
 import platform
 from pkg_resources import resource_string
 
@@ -18,6 +19,7 @@ from main_screen import MainScreen
 class TikiBotGui(Tk):
     def __init__(self):
         super(TikiBotGui, self).__init__()
+        self.passcode = "8888"
         self.screen_stack = []
         self.image_cache = {}
         self.title("TikiBot")
@@ -44,11 +46,20 @@ class TikiBotGui(Tk):
         self.load_configs()
         self.screen_push(MainScreen(self))
 
+    def set_passcode(self, newpass):
+        self.passcode = newpass
+
     def load_configs(self):
+        misc_confs = yaml.load(self.get_resource("misc_config.yaml"))
+        self.passcode = misc_confs.get('passcode', '8888')
         SupplyFeed.load(self.get_resource("feeds_config.yaml"))
         Recipe.load(self.get_resource("recipes_config.yaml"))
 
     def save_configs(self):
+        misc_confs = {
+            "passcode": self.passcode,
+        }
+        self.set_resource("misc_config.yaml", yaml.dump(misc_confs))
         self.set_resource("feeds_config.yaml", SupplyFeed.dump())
         self.set_resource("recipes_config.yaml", Recipe.dump())
 
