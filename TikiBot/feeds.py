@@ -1,6 +1,5 @@
 import sys
 import time
-import yaml
 import platform
 import operator
 
@@ -41,30 +40,39 @@ class SupplyFeed(object):
 
     @classmethod
     def fromDict(cls, d):
-        """Create a new SupplyFeed instance from a dictionary description."""
-        return cls(d['type'], d['name'], d['flowrate'], d.get('overage', 0.25), d['available'])
+        """Create new SupplyFeed instances from a dictionary description."""
+        # Delete old feeds
+        for feed in cls.feed_order:
+            feed.delete_feed()
+        # Add feeds from dict
+        for feeddict in d['feeds']:
+            for name, data in feeddict.items():
+                cls(
+                    data.get('type', 'Juices'),
+                    name,
+                    flowrate=data.get('flowrate', 14.2),
+                    overage=data.get('overage', 0.25),
+                    avail=data.get('available', True)
+                )
+
+    @classmethod
+    def toDictAll(cls, d):
+        """Create a dictionary description of all SupplyFeed instances."""
+        d['feeds'] = []
+        for feed in cls.feed_order:
+            d['feeds'].append(feed.toDict())
+        return d
 
     def toDict(self):
         """Create a dictionary description of this SupplyFeed instance."""
         return {
-            'type': self.type_,
-            'name': self.name,
-            'flowrate': self.flowrate,
-            'overage': self.pulse_overage,
-            'available': self.avail,
+            self.name: {
+                'type': self.type_,
+                'flowrate': self.flowrate,
+                'overage': self.pulse_overage,
+                'available': self.avail,
+            }
         }
-
-    @classmethod
-    def load(cls, stream):
-        """Load SupplyFeeds from given YAML data"""
-        dictarr = yaml.load(stream)
-        for d in dictarr:
-            cls.fromDict(d)
-
-    @classmethod
-    def dump(cls):
-        """Create a YAML dump of all SupplyFeeds"""
-        return yaml.dump([feed.toDict() for feed in cls.feed_order])
 
     @classmethod
     def _getMotorByNumber(cls, motor_num):

@@ -1,0 +1,103 @@
+feeds:
+- Meyer's Dark Rum: {available: true, flowrate: 12.8, overage: 0.04, type: Rums}
+- Appleton's Gold Rum: {available: true, flowrate: 12.8, overage: 0.04, type: Rums}
+- Meyer's Silver Rum: {available: true, flowrate: 12.8, overage: 0.04, type: Rums}
+- Lemonheart 151 Rum: {available: true, flowrate: 12.8, overage: 0.04, type: Rums}
+- Lime Juice: {available: true, flowrate: 12.8, overage: 0.04, type: Juices}
+- Lemon Juice: {available: true, flowrate: 12.8, overage: 0.04, type: Juices}
+- Orange Juice: {available: true, flowrate: 12.8, overage: 0.04, type: Juices}
+- Pineapple Juice: {available: true, flowrate: 12.8, overage: 0.04, type: Juices}
+- Passion Fruit Syrup: {available: true, flowrate: 12.8, overage: 0.04, type: Flavorings}
+- Sugar Syrup: {available: true, flowrate: 13.3, overage: 0.02, type: Flavorings}
+- Angostura Bitters: {available: true, flowrate: 7.8, overage: 0.2, type: Flavorings}
+- Grenadine: {available: true, flowrate: 13.2, overage: 0.03, type: Flavorings}
+passcode: '8888'
+recipes:
+  Beachcomber's Gold:
+    ingredients:
+    - [Meyer's Silver Rum, 1.0, oz]
+    - [Appleton's Gold Rum, 0.5, oz]
+    - [Lime Juice, 0.333, oz]
+    - [Passion Fruit Syrup, 0.75, oz]
+    - [Sugar Syrup, 0.5, oz]
+    - [Angostura Bitters, 1.0, dash]
+    type: Tiki Drinks
+  Chief Lapu Lapu:
+    ingredients:
+    - [Orange Juice, 3.0, oz]
+    - [Lemon Juice, 2.0, oz]
+    - [Sugar Syrup, 1.0, oz]
+    - [Passion Fruit Syrup, 1.0, oz]
+    - [Meyer's Dark Rum, 1.5, oz]
+    - [Meyer's Silver Rum, 1.5, oz]
+    type: Tiki Drinks
+  Hurricane:
+    ingredients:
+    - [Lemon Juice, 2.0, oz]
+    - [Passion Fruit Syrup, 2.0, oz]
+    - [Meyer's Dark Rum, 4.0, oz]
+    type: Tiki Drinks
+  Orange Juice:
+    ingredients:
+    - [Orange Juice, 6.0, oz]
+    type: Juices
+  Pineapple Juice:
+    ingredients:
+    - [Pineapple Juice, 6.0, oz]
+    type: Juices
+  Pineapple Orange Juice:
+    ingredients:
+    - [Orange Juice, 3.0, oz]
+    - [Pineapple Juice, 3.0, oz]
+    type: Juices
+  Planter's Punch:
+    ingredients:
+    - [Lime Juice, 0.75, oz]
+    - [Sugar Syrup, 1.0, oz]
+    - [Meyer's Dark Rum, 3.0, oz]
+    - [Angostura Bitters, 2.0, dash]
+    type: Tiki Drinks
+  Shrunken Skull:
+    ingredients:
+    - [Lime Juice, 1.0, oz]
+    - [Grenadine, 1.0, oz]
+    - [Appleton's Gold Rum, 1.0, oz]
+    - [Meyer's Dark Rum, 1.0, oz]
+    type: Tiki Drinks
+  Tiger Shark:
+    ingredients:
+    - [Appleton's Gold Rum, 0.5, oz]
+    - [Meyer's Silver Rum, 0.5, oz]
+    - [Lemonheart 151 Rum, 0.5, oz]
+    - [Lime Juice, 0.5, oz]
+    - [Pineapple Juice, 0.5, oz]
+    - [Sugar Syrup, 0.5, oz]
+    type: Tiki Drinks
+  Trader Vic Grog:
+    ingredients:
+    - [Lemon Juice, 1.0, oz]
+    - [Pineapple Juice, 1.0, oz]
+    - [Passion Fruit Syrup, 1.0, oz]
+    - [Meyer's Dark Rum, 2.0, oz]
+    - [Angostura Bitters, 1.0, dash]
+    type: Tiki Drinks
+  Tropical Punch:
+    ingredients:
+    - [Orange Juice, 2.0, oz]
+    - [Lime Juice, 2.0, oz]
+    - [Pineapple Juice, 2.0, oz]
+    - [Grenadine, 0.5, oz]
+    type: Juices
+  Zombie:
+    ingredients:
+    - [Lime Juice, 1.0, oz]
+    - [Lemon Juice, 1.0, oz]
+    - [Pineapple Juice, 1.0, oz]
+    - [Passion Fruit Syrup, 1.0, oz]
+    - [Meyer's Silver Rum, 1.0, oz]
+    - [Appleton's Gold Rum, 1.0, oz]
+    - [Lemonheart 151 Rum, 1.0, oz]
+    - [Sugar Syrup, 1.0, tsp]
+    - [Angostura Bitters, 1.0, dash]
+    type: Tiki Drinks
+type_icons: {Cocktails: CocktailsIcon.gif, Juices: JuicesIcon.gif, Tiki Drinks: TikiDrinkIcon.gif}

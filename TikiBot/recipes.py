@@ -3,7 +3,6 @@ from __future__ import division
 import sys
 import math
 import time
-import yaml
 import platform
 import operator
 from feeds import SupplyFeed
@@ -175,6 +174,7 @@ class Recipe(object):
     by_feed = {}
 
     def __init__(self, type_, name, ingredients=[], icon=None):
+        global type_icons
         if type_ not in type_icons:
             raise UnknownRecipeTypeError()
         if type_ not in Recipe.recipe_types:
@@ -200,12 +200,33 @@ class Recipe(object):
 
     @classmethod
     def fromDict(cls, d):
-        return cls(d['type'], d['name'], d['ingredients'], icon=d.get('icon'))
+        """Create new Recipe instances from a dictionary description."""
+        global type_icons
+        if 'type_icons' in type_icons:
+            type_icons = d['type_icons']
+        # Delete old Recipes
+        for name, recipe in cls.recipes.items():
+            recipe.delete_recipe()
+        # Add Recipes from dict
+        for name, data in d.get('recipes', {}).items():
+            cls(
+                data['type'],
+                name,
+                data['ingredients'],
+                icon=data.get('icon')
+            )
+
+    @classmethod
+    def toDictAll(cls, d):
+        """Create a dictionary description of all Recipe instances."""
+        global type_icons
+        d['recipes'] = {name: recipe.toDict() for name, recipe in cls.recipes.items()}
+        d['type_icons'] = type_icons
+        return d
 
     def toDict(self):
         data = {
             'type': self.type_,
-            'name': self.name,
             'ingredients': [x.toArray() for x in self.ingredients]
         }
         if self.icon:
@@ -213,35 +234,17 @@ class Recipe(object):
         return data
 
     @classmethod
-    def load(cls, stream):
-        data = yaml.load(stream)
-        type_icons = data['type_icons']
-        dictarr = data['recipes']
-        for d in dictarr:
-            try:
-                cls.fromDict(d)
-            except UnknownRecipeTypeError:
-                pass
-            except IndexError:
-                pass
-
-    @classmethod
-    def dump(cls):
-        return yaml.dump({
-            'type_icons': type_icons,
-            'recipes': [recipe.toDict() for recipe in cls.getAll()],
-        })
-
-    @classmethod
     def getTypeNames(cls):
         return sorted(cls.recipe_types.keys())
 
     @staticmethod
     def getPossibleTypeNames():
+        global type_icons
         return sorted(type_icons.keys())
 
     @classmethod
     def getTypeIcon(cls, name):
+        global type_icons
         return type_icons[name]
 
     @classmethod
@@ -295,6 +298,7 @@ class Recipe(object):
         Recipe.recipes[newname] = self
 
     def retype(self, newtype):
+        global type_icons
         if newtype not in type_icons:
             raise UnknownRecipeTypeError()
         if newtype not in Recipe.recipe_types:

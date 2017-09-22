@@ -36,14 +36,16 @@ action with the valve open.
 
 Configuration Files
 -------------------
-`misc_config.yaml`: Miscellaneous configurations like passcode.
+`resources/tikibot_configs.yaml`: Contains all configs for passcode,
+feeds, recipes, etc.
 
-`feeds_config.yaml`: Configurations for the feed supply lines.
-
-`recipes_config.yaml`: Recipes and their ingredients.
-
-The default passcode to access the configuration screen is '8888'.  You can 
-and should change that with the "Change Passcode" button in the config menu.
+In the lower right corner of the main screen is a gear icon.  This is
+the configuration menu button. If you press it, it will ask for an
+administrative passcode.  The default is '8888'.  Once you enter the
+correct passcode, you will be shown the configuration screen.  From
+here, you can change the passcode (recommended!), add, edit and re-order
+feeds, add, and edit drink recipes, and shutdown or reboot the system.
+Any changes made here will be saved to the `tikibot_configs.yaml` file.
 
 
 Code Entrypoint
@@ -53,7 +55,9 @@ Code Entrypoint
 
 Screens Layout
 --------------
-Here's the hierarchy of GUI screens for the application.  The button name that leads to a screen is in "quotes".  If a screen is a subclass of another screen class, the base class is in (parens).
+Here's the hierarchy of GUI screens for the application.  The button
+name that leads to a screen is in "quotes".  If a screen is a
+subclass of another screen class, the base class is in (parens).
 
     MainScreen
         "Juices" RecipeScreen(SelectScreen)
@@ -68,7 +72,9 @@ Here's the hierarchy of GUI screens for the application.  The button name that l
         "⚙" LockScreen
             ConfigScreen
                 "Manage Feeds" ManageFeedsScreen(SelectScreen)
+                    "+" AlphaScreen
                     FeedScreen
+                        "Delete Feed" SelectScreen
                         "Rename Feed" AlphaScreen
                         "Calibrate" CalibScreen
                 "Manage Recipes" ManageRecipesScreen(SelectScreen)
@@ -80,5 +86,7 @@ Here's the hierarchy of GUI screens for the application.  The button name that l
                         "-" SelectScreen
                         "✎" AmountScreen
                 "Dump All Feeds" DumpScreen
+                "Change Passcode" LockScreen
+                    NotifyScreen
                 "Shutdown" ShutdownScreen
 

@@ -16,6 +16,16 @@ from recipes import Recipe
 from main_screen import MainScreen
 
 
+def float_representer(dumper, value):
+    text = '%.3f' % (value)
+    while text[-1] == '0' and text[-2] != '.':
+        text = text[:-1]
+    return dumper.represent_scalar(u'tag:yaml.org,2002:float', text)
+
+
+yaml.add_representer(float, float_representer)
+
+
 class TikiBotGui(Tk):
     def __init__(self):
         super(TikiBotGui, self).__init__()
@@ -50,18 +60,18 @@ class TikiBotGui(Tk):
         self.passcode = newpass
 
     def load_configs(self):
-        misc_confs = yaml.load(self.get_resource("misc_config.yaml"))
-        self.passcode = misc_confs.get('passcode', '8888')
-        SupplyFeed.load(self.get_resource("feeds_config.yaml"))
-        Recipe.load(self.get_resource("recipes_config.yaml"))
+        confs = yaml.load(self.get_resource("tikibot_configs.yaml"))
+        self.passcode = confs.get('passcode', '8888')
+        SupplyFeed.fromDict(confs)
+        Recipe.fromDict(confs)
 
     def save_configs(self):
-        misc_confs = {
+        confs = {
             "passcode": self.passcode,
         }
-        self.set_resource("misc_config.yaml", yaml.dump(misc_confs))
-        self.set_resource("feeds_config.yaml", SupplyFeed.dump())
-        self.set_resource("recipes_config.yaml", Recipe.dump())
+        confs = SupplyFeed.toDictAll(confs)
+        confs = Recipe.toDictAll(confs)
+        self.set_resource("tikibot_configs.yaml", yaml.dump(confs))
 
     def set_resource(self, name, data):
         with open(os.path.join("resources", name), "w") as f:
