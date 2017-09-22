@@ -60,7 +60,11 @@ class TikiBotGui(Tk):
         self.passcode = newpass
 
     def load_configs(self):
-        confs = yaml.load(self.get_resource("tikibot_configs.yaml"))
+        try:
+            with open(os.path.expanduser("~/.tikibot.yaml"), "r") as f:
+                confs = yaml.safe_load(f)
+        except FileNotFoundError:
+            confs = yaml.load(self.get_resource("tikibot_configs.yaml"))
         self.passcode = confs.get('passcode', '8888')
         SupplyFeed.fromDict(confs)
         Recipe.fromDict(confs)
@@ -72,7 +76,8 @@ class TikiBotGui(Tk):
         }
         confs = SupplyFeed.toDictAll(confs)
         confs = Recipe.toDictAll(confs)
-        self.set_resource("tikibot_configs.yaml", yaml.dump(confs))
+        with open(os.path.expanduser("~/.tikibot.yaml"), "w") as f:
+            f.write(yaml.dump(confs))
 
     def set_resource(self, name, data):
         with open(os.path.join("resources", name), "w") as f:
