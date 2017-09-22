@@ -23,7 +23,7 @@ class LockScreen(Frame):
             setbtn = RectButton(self, text="Set", width=120, command=self.handle_button_set)
             setbtn.grid(column=0, row=9, columnspan=2, padx=10, pady=10, sticky=S+W)
         backbtn = RectButton(self, text="\u23ce", width=120, command=self.handle_button_back)
-        self.lbl.grid(column=1, row=1, columnspan=3, padx=10, pady=10, sticky=N+E+W)
+        self.lbl.grid(column=0, row=1, columnspan=5, padx=10, pady=10, sticky=N+E+W)
         for x in range(3):
             for y in range(3):
                 numbtns[x+y*3+1].grid(column=x+1, row=y+2, padx=10, pady=10)
@@ -32,6 +32,9 @@ class LockScreen(Frame):
         backbtn.grid(column=3, row=9, columnspan=2, padx=10, pady=10, sticky=S+E)
 
         self.columnconfigure(0, weight=1)
+        self.columnconfigure(1, weight=0)
+        self.columnconfigure(2, weight=0)
+        self.columnconfigure(3, weight=0)
         self.columnconfigure(4, weight=1)
         self.rowconfigure(0, minsize=10)
         self.rowconfigure(8, weight=1)
