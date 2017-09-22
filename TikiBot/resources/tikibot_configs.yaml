@@ -1,3 +1,4 @@
+conf_version: 1.0.0
 feeds:
 - Meyer's Dark Rum: {available: true, flowrate: 12.8, overage: 0.04, type: Rums}
 - Appleton's Gold Rum: {available: true, flowrate: 12.8, overage: 0.04, type: Rums}

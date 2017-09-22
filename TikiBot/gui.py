@@ -67,6 +67,7 @@ class TikiBotGui(Tk):
 
     def save_configs(self):
         confs = {
+            "conf_version": "1.0.0",
             "passcode": self.passcode,
         }
         confs = SupplyFeed.toDictAll(confs)
