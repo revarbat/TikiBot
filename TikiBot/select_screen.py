@@ -40,6 +40,7 @@ class SelectScreen(Frame):
             state = NORMAL
             fg = None
             bg = None
+            cb = None
             compound=CENTER
             if type(item) is dict:
                 name = item['name']
@@ -47,13 +48,14 @@ class SelectScreen(Frame):
                 state = DISABLED if item.get('disabled', False) else NORMAL
                 fg = item.get('fgcolor', None)
                 bg = item.get('bgcolor', None)
+                cb = item.get('callback', None)
                 compound = item.get('compound', CENTER)
             targ_col = 1 + col*2
             targ_row = 3 + row*2
             if not icon:
                 icon = ""
             img = self.master.get_image(icon)
-            cmd = lambda x=name: self.callback(x)
+            cmd = cb if cb else lambda x=name: self.callback(x)
             btn = Button(self, text=name, image=img, compound=compound, fg=fg, bg=bg, state=state, command=cmd)
             btn.grid(column=targ_col, row=targ_row, sticky=N+E+W)
             self.buttons.append(btn)
@@ -66,7 +68,7 @@ class SelectScreen(Frame):
                 self.grid_columnconfigure(col, minsize=10)
             else:
                 self.grid_columnconfigure(col, weight=1)
-        for row in range(2, rows+5, 2):
+        for row in range(2, rows+6, 2):
             self.grid_rowconfigure(row+2, minsize=10)
 
     def handle_button_back(self):
@@ -74,4 +76,5 @@ class SelectScreen(Frame):
 
     def handle_button_select(self, item):
         pass
+
 
