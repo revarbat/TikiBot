@@ -69,7 +69,7 @@ class AlphaScreen(Frame):
                     keybtn.grid(column=col, row=0, sticky=E+W, padx=5, pady=5)
                     rowfr.columnconfigure(col, weight=keywidth)
                 rowfr.pack(side=TOP, fill=X, expand=1)
-        self.change_kb(0)
+        self.change_kb(1)
 
     def change_kb(self, num):
         if self.curr_kbfr and self.curr_kbfr != self.kbframes[num]:
@@ -116,6 +116,9 @@ class AlphaScreen(Frame):
             return
         if key == "Space":
             key = " "
+            self.change_kb(1)
+        elif self.curr_kbfr == self.kbframes[1]:
+            self.change_kb(0)
         self.entry.insert(INSERT, key)
 
 
