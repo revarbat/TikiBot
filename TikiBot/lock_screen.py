@@ -23,7 +23,7 @@ class LockScreen(Frame):
             setbtn = RectButton(self, text="Set", width=120, command=self.handle_button_set)
             setbtn.grid(column=0, row=9, columnspan=2, padx=10, pady=10, sticky=S+W)
         backbtn = RectButton(self, text="\u23ce", width=120, command=self.handle_button_back)
-        self.lbl.grid(column=1, row=1, columnspan=4, padx=10, pady=10, sticky=N+W)
+        self.lbl.grid(column=1, row=1, columnspan=3, padx=10, pady=10, sticky=N+E+W)
         for x in range(3):
             for y in range(3):
                 numbtns[x+y*3+1].grid(column=x+1, row=y+2, padx=10, pady=10)
@@ -40,9 +40,9 @@ class LockScreen(Frame):
 
     def update_label(self):
         if self.set_pass:
-            self.lbl.config(text="%s %s" % (self.labeltext, self.entered_code))
+            self.lbl.config(text="%s\n%s" % (self.labeltext, self.entered_code))
         else:
-            self.lbl.config(text="%s %s" % (self.labeltext, "*" * len(self.entered_code)))
+            self.lbl.config(text="%s\n%s" % (self.labeltext, "*" * len(self.entered_code)))
         self.update()
 
     def handle_button_num(self, btnnum):
