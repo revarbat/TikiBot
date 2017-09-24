@@ -330,7 +330,7 @@ class Recipe(object):
         tot_vol = self.totalVolume()
         vol_mult = volume / tot_vol
         self.dispensing = []
-        max_time = max([vol_mult * x.milliliters / x.feed.feedrate for x in self.ingredients])
+        max_time = max([vol_mult * x.milliliters / x.feed.flowrate for x in self.ingredients])
         for ingr in self.ingredients:
             self.dispensing.append(DispensingIngredient(ingr, vol_mult, max_time))
         for ingr in self.dispensing:

@@ -137,9 +137,9 @@ class SupplyFeed(object):
                 self.motor = SupplyFeed._getMotorByNumber(self.motor_num)
             self.motor.setSpeed(255)
             self.motor.run(AFMH.FORWARD)
-            self.flowing = True
         else:
             eprint("Starting feed %d @%f" % (self.motor_num, time.time() - progstart_time))
+        self.flowing = True
 
     def stopFeed(self):
         """Turn off this SupplyFeed, to stop it's flow."""
@@ -149,9 +149,9 @@ class SupplyFeed(object):
                 self.motor = SupplyFeed._getMotorByNumber(self.motor_num)
             self.motor.setSpeed(0)
             self.motor.run(AFMH.RELEASE)
-            self.flowing = False
         else:
             eprint("STOPPING feed %d @%f" % (self.motor_num, time.time() - progstart_time))
+        self.flowing = False
 
     def delete_feed(self):
         """Delete this SupplyFeed, removing it from the feed_order, feeds, and feed_types"""
