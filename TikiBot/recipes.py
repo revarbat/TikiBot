@@ -148,11 +148,11 @@ class Ingredient(object):
 
 
 class DispensingIngredient(Ingredient):
-    def __init__(self, ingr, size_mult, max_vol):
+    def __init__(self, ingr, size_mult, max_time):
         new_vol = ingr.milliliters * size_mult
         super(DispensingIngredient, self).__init__(ingr.feed, new_vol)
         self.dispensed = 0.0
-        self.proportion = new_vol / max_vol
+        self.proportion = (new_vol / ingr.feed.flowrate) / max_time
 
     def done(self):
         return self.dispensed >= self.milliliters
@@ -330,9 +330,9 @@ class Recipe(object):
         tot_vol = self.totalVolume()
         vol_mult = volume / tot_vol
         self.dispensing = []
-        max_vol = max([x.milliliters * vol_mult for x in self.ingredients])
+        max_time = max([vol_mult * x.milliliters / x.feed.feedrate for x in self.ingredients])
         for ingr in self.ingredients:
-            self.dispensing.append(DispensingIngredient(ingr, vol_mult, max_vol))
+            self.dispensing.append(DispensingIngredient(ingr, vol_mult, max_time))
         for ingr in self.dispensing:
             ingr.startFeed()
         self.last_update_time = time.time()
