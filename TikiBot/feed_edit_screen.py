@@ -7,6 +7,7 @@ from rectbutton import RectButton
 from alpha_screen import AlphaScreen
 from select_screen import SelectScreen
 from calib_screen import CalibScreen
+from touch_checkbox import TouchCheckbox
 
 
 class FeedEditScreen(Frame):
@@ -22,7 +23,7 @@ class FeedEditScreen(Frame):
         orderdnbtn = RectButton(self, text="Incr Motor #", width=150, command=self.handle_button_feed_orderdn)
         orderupbtn = RectButton(self, text="Decr Motor #", width=150, command=self.handle_button_feed_orderup)
         delbtn = RectButton(self, text="Delete Feed", width=150, command=self.handle_button_feed_del)
-        enbtn = Checkbutton(self, text="Available", variable=self.avail, command=self.handle_button_enable)
+        enbtn = TouchCheckbox(self, text="Available", variable=self.avail, command=self.handle_button_enable)
         calibbtn = RectButton(self, text="Calibration", width=150, command=self.handle_button_calib)
         self.feedbtn = RectButton(self, text="Start Feed", width=150, command=self.handle_button_feed)
         backbtn = RectButton(self, text="\u23ce", width=120, command=self.handle_button_back)
