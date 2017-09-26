@@ -42,7 +42,7 @@ class DispensingScreen(Frame):
             self.desc.tag_config("percent", foreground="#c44")
             self.desc.insert(END, "Dispensing: %s\n" % recipe.getName(), "header")
             for ingr in recipe.dispensing:
-                self.desc.insert(END, ingr.readableDesc(), "ingr")
+                self.desc.insert(END, ingr.readableDesc(metric=self.master.use_metric), "ingr")
                 self.desc.insert(END, " ")
                 self.desc.insert(END, "%.0f%%\n" % ingr.percentDone(), 'percent')
             self.desc.config(state=DISABLED)

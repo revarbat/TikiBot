@@ -30,6 +30,7 @@ class TikiBotGui(Tk):
     def __init__(self):
         super(TikiBotGui, self).__init__()
         self.passcode = "8888"
+        self.use_metric = False
         self.screen_stack = []
         self.image_cache = {}
         self.title("TikiBot")
@@ -66,6 +67,7 @@ class TikiBotGui(Tk):
         except FileNotFoundError:
             confs = yaml.load(self.get_resource("tikibot_configs.yaml"))
         self.passcode = confs.get('passcode', '8888')
+        self.use_metric = confs.get('use_metric', False)
         SupplyFeed.fromDict(confs)
         Recipe.fromDict(confs)
 
@@ -73,9 +75,10 @@ class TikiBotGui(Tk):
         confs = {
             "conf_version": "1.0.0",
             "passcode": self.passcode,
+            "use_metric": self.use_metric,
         }
         confs = SupplyFeed.toDictAll(confs)
-        confs = Recipe.toDictAll(confs)
+        confs = Recipe.toDictAll(confs, metric=self.use_metric)
         with open(os.path.expanduser("~/.tikibot.yaml"), "w") as f:
             f.write(yaml.dump(confs))
 

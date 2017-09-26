@@ -39,41 +39,53 @@ class PourScreen(Frame):
         self.grid_rowconfigure(7, weight=1)
         self.grid_rowconfigure(8, minsize=20)
 
-        self.set_amount(int(recipe.totalVolume()/OZ+0.5))
+        if self.master.use_metric:
+            self.set_amount(25*int(recipe.totalVolume()/25+0.5))
+        else:
+            self.set_amount(int(recipe.totalVolume()/OZ+0.5))
 
     def get_amount(self):
         return int(self.selbtn.cget('text').split()[1])
 
     def set_amount(self, val):
-        self.selbtn.config(text="\nPour\n%d oz" % val)
+        unit = "ml" if self.master.use_metric else "oz"
+        self.selbtn.config(text="\nPour\n%d %s" % (val, unit))
         self.update_recipe_desc()
 
     def update_recipe_desc(self):
         vol = self.get_amount()
-        partial = vol * OZ / self.recipe.totalVolume()
+        if self.master.use_metric:
+            partial = vol / self.recipe.totalVolume()
+        else:
+            partial = vol * OZ / self.recipe.totalVolume()
         self.desc.config(state=NORMAL)
         self.desc.delete(1.0, END)
         self.desc.tag_config("recipe", lmargin1=3, rmargin=3, spacing1=2, spacing3=2, background="#077", foreground="white")
         self.desc.insert(END, "%s\n" % self.recipe.getName(), "recipe")
         for ing in self.recipe.ingredients:
-            self.desc.insert(END, "%s\n" % ing.readableDesc(partial))
+            self.desc.insert(END, "%s\n" % ing.readableDesc(partial, metric=self.master.use_metric))
         self.desc.config(state=DISABLED)
         self.master.update()
 
     def handle_button_up(self):
         val = self.get_amount()
-        if val < 16:
-            val += 1
+        incdec = 25 if self.master.use_metric else 1
+        maxval = 500 if self.master.use_metric else 16
+        if val < maxval:
+            val += incdec
         self.set_amount(val)
 
     def handle_button_dn(self):
         val = self.get_amount()
-        if val > 1:
-            val -= 1
+        incdec = 25 if self.master.use_metric else 1
+        if val > incdec:
+            val -= incdec
         self.set_amount(val)
 
     def handle_button_sel(self):
-        vol = self.get_amount() * OZ
+        vol = self.get_amount()
+        if not self.master.use_metric:
+            vol *= OZ
         self.master.screen_push(DispensingScreen(self.master, self.recipe, vol))
 
     def handle_button_back(self):

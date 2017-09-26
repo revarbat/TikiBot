@@ -83,17 +83,19 @@ class Ingredient(object):
         feed = SupplyFeed.getByName(name)
         return cls(feed, ml)
 
-    def toArray(self):
-        val, unit = self.getBarUnits()
+    def toArray(self, metric=False):
+        val, unit = self.getBarUnits(metric=metric)
         return [self.feed.getName(), val, unit]
 
     def getName(self):
         return self.feed.getName()
 
-    def getBarUnits(self, partial=1.0):
+    def getBarUnits(self, partial=1.0, metric=False):
         ml = self.milliliters * partial
         unit, div = ("dash", DASH)
-        if ml > 0.25 * OZ:
+        if metric:
+            unit, div = ("ml", ML)
+        elif ml > 0.25 * OZ:
             unit, div = ("oz", OZ)
         elif ml > TBSP:
             unit, div = ("Tbsp", TBSP)
@@ -102,8 +104,10 @@ class Ingredient(object):
         val = ml / div
         return (val, unit)
 
-    def fractionalBarUnits(self, partial=1.0):
-        val, unit = self.getBarUnits(partial)
+    def fractionalBarUnits(self, partial=1.0, metric=False):
+        val, unit = self.getBarUnits(partial, metric=metric)
+        if metric:
+            return (math.floor(val*10+0.5)/10.0, "", unit)
         whole = math.floor(val)
         frac = val - whole
         min_delta = 1
@@ -124,11 +128,11 @@ class Ingredient(object):
             frac = "%d/%d" % (found_numer, found_denom)
         return (whole, frac, unit)
 
-    def readableDesc(self, partial=1.0):
-        whole, frac, unit = self.fractionalBarUnits(partial=partial)
+    def readableDesc(self, partial=1.0, metric=False):
+        whole, frac, unit = self.fractionalBarUnits(partial=partial, metric=metric)
         valstr = ""
         if whole > 0:
-            valstr += "%d" % whole
+            valstr += "%.3g" % whole
         if frac:
             if valstr:
                 valstr += " "
@@ -217,17 +221,17 @@ class Recipe(object):
             )
 
     @classmethod
-    def toDictAll(cls, d):
+    def toDictAll(cls, d, metric=False):
         """Create a dictionary description of all Recipe instances."""
         global type_icons
-        d['recipes'] = {name: recipe.toDict() for name, recipe in cls.recipes.items()}
+        d['recipes'] = {name: recipe.toDict(metric=metric) for name, recipe in cls.recipes.items()}
         d['type_icons'] = type_icons
         return d
 
-    def toDict(self):
+    def toDict(self, metric=False):
         data = {
             'type': self.type_,
-            'ingredients': [x.toArray() for x in self.ingredients]
+            'ingredients': [x.toArray(metric=metric) for x in self.ingredients]
         }
         if self.icon:
             data['icon'] = self.icon

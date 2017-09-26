@@ -116,7 +116,7 @@ class RecipeEditScreen(Frame):
         self.master.screen_pop()
 
     def handle_button_ingr_amt(self):
-        whole, frac, unit = self.sel_ingr.fractionalBarUnits()
+        whole, frac, unit = self.sel_ingr.fractionalBarUnits(metric=self.master.use_metric)
         self.master.screen_push(AmountScreen(self.master, whole=whole, frac=frac, unit=unit, labeltext="Select the amount:", callback=self.edit_ingredient_step1))
 
     def edit_ingredient_step1(self, amt):
@@ -127,7 +127,7 @@ class RecipeEditScreen(Frame):
     def update_ingr_listbox(self):
         self.ingrlb.delete(0, END)
         for ingr in self.recipe.ingredients:
-            self.ingrlb.insert(END, ingr.readableDesc())
+            self.ingrlb.insert(END, ingr.readableDesc(metric=self.master.use_metric))
         self.ingrlb.focus()
         self.ingrlb.selection_clear(0, END)
         self.ingrlb.selection_anchor(0)

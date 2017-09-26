@@ -10,22 +10,27 @@ from dump_screen import DumpScreen
 from lock_screen import LockScreen
 from notify_screen import NotifyScreen
 from shutdown_screen import ShutdownScreen
+from touch_checkbox import TouchCheckbox
 
 
 class ConfigScreen(Frame):
     def __init__(self, master):
         super(ConfigScreen, self).__init__(master)
+        self.use_metric = IntVar()
+        self.use_metric.set(1 if self.master.use_metric else 0)
         feedsbtn = RectButton(self, text="Manage Feeds", command=self.handle_button_feeds)
         recipesbtn = RectButton(self, text="Manage Recipes", command=self.handle_button_recipes)
         dumpbtn = RectButton(self, text="Dump All Feeds", command=self.handle_button_dump)
+        unitbtn = TouchCheckbox(self, text="Metric Units", variable=self.use_metric, command=self.handle_button_metric)
         chpassbtn = RectButton(self, text="Change Passcode", command=self.handle_button_chpass)
         shutdownbtn = RectButton(self, text="Shutdown", command=self.handle_button_shutdown)
         backbtn = RectButton(self, text="\u23ce", width=120, command=self.handle_button_back)
         feedsbtn.grid(column=1, row=1, pady=10, sticky=N+E+W)
         recipesbtn.grid(column=1, row=2, pady=10, sticky=N+E+W)
         dumpbtn.grid(column=1, row=3, pady=20, sticky=N+E+W)
-        chpassbtn.grid(column=1, row=4, pady=10, sticky=N+E+W)
-        shutdownbtn.grid(column=1, row=5, pady=10, sticky=N+E+W)
+        unitbtn.grid(column=1, row=4, pady=10, sticky=N+E+W)
+        chpassbtn.grid(column=1, row=5, pady=20, sticky=N+E+W)
+        shutdownbtn.grid(column=1, row=6, pady=10, sticky=N+E+W)
         backbtn.grid(column=1, row=9, pady=10, sticky=S+E)
         self.columnconfigure(0, minsize=20)
         self.columnconfigure(1, weight=1)
@@ -42,6 +47,10 @@ class ConfigScreen(Frame):
 
     def handle_button_dump(self):
         self.master.screen_push(DumpScreen(self.master))
+
+    def handle_button_metric(self):
+        self.master.use_metric = self.use_metric.get() != 0
+        self.master.save_configs()
 
     def handle_button_shutdown(self):
         self.master.screen_push(ShutdownScreen(self.master))
