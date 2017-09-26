@@ -13,7 +13,7 @@ class TouchCheckbox(Checkbutton):
         if 'compound' not in kwargs:
             kwargs['compound'] = LEFT
         if 'pady' not in kwargs:
-            kwargs['pady'] = 5
+            kwargs['pady'] = 2
         if 'padx' not in kwargs:
             kwargs['padx'] = 5
         if 'indicatoron' not in kwargs:
