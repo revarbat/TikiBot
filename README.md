@@ -2,6 +2,10 @@ TikiBot
 =======
 Touchscreen BarBot software for auto-dispensing mixed drinks.
 
+TikiBot Lives!  It was a great success at my friend's Tiki themed party.
+
+![TikiBot Live at a Party](imgsrcs/TikiBotAtParty.jpg)
+
 
 Hardware
 --------
