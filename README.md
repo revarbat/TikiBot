@@ -9,6 +9,43 @@ TikiBot Lives!  It was a great success at my friend's Tiki themed party.
 ![TikiBot Live at a Party](imgsrcs/TikiBotAtParty.jpg)
 
 
+Standard Drinks List
+--------------------
+The default configuration is for a 12-feed TikiBot.
+It expects the following ingredient feeds:
+
+1. Meyer's Dark Rum
+2. Appleton's Signature Blend
+3. Meyer's Platinum White Rum
+4. Lemonheart 151 Rum
+5. Lime Juice
+6. Lemon Juice
+7. Orange Juice
+8. Pineapple Juice
+9. Passion Fruit Syrup
+10. Sugar Syrup
+11. Angostura Bitters
+12. Grenadine
+
+The following Tiki recipes can be made from those:
+
+1. Beachcomber's Gold
+2. Chief Lapu Lapu
+3. Hurricane
+4. Planter's Punch
+5. Shrunken Skull
+6. Tiger Shark
+7. Trader Vic Grog
+8. Zombie
+
+The following non-alcoholic juice drinks can also be made:
+
+1. Orange Juice
+2. Pineapple Juice
+3. Pineapple Orange Juice
+4. Tropical Punch
+
+
 Hardware
 --------
 This software has been tested with the following hardware:
@@ -120,4 +157,5 @@ subclass of another screen class, the base class is in (parens).
                 "Change Passcode" LockScreen
                     NotifyScreen
                 "Shutdown" ShutdownScreen
+
 
