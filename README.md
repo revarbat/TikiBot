@@ -81,7 +81,7 @@ administrative passcode.  The default is '8888'.  Once you enter the
 correct passcode, you will be shown the configuration screen.  From
 here, you can change the passcode (recommended!), add, edit and re-order
 feeds, add, and edit drink recipes, and shutdown or reboot the system.
-Any changes made here will be saved to the `$HOME/tikibot.yaml` file.
+Any changes made here will be saved to the `$HOME/.tikibot.yaml` file.
 
 
 Screens Layout
