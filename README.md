@@ -1,6 +1,8 @@
 TikiBot
 =======
-Touchscreen BarBot software for auto-dispensing mixed drinks.
+Touchscreen BarBot software for auto-dispensing mixed drinks.  Runs under
+Linux on a Raspberry Pi or Udoo, using DC motor controllers over I2C, to
+activate pumps and valves to dispense ingredients.
 
 TikiBot Lives!  It was a great success at my friend's Tiki themed party.
 
@@ -37,11 +39,41 @@ The polarity of the wiring is irrelevant for the linked pumps and
 valves.  For them, either polarity will result in the forward pump
 action with the valve open.
 
+The pumps-valve pairs can be seated into a ring of Pump Wedges that can
+be 3D printed from the model `STLs/PumpWedge12.stl` (for a 12 feed ring)
+or `STLs/PumpWedge16.stl` (for 16 feed rings).  A corresponding Feed Guide
+model can be found as `STLs/FeedGuide12.stl` or `STLs/FeedGuide16.stl`.
+The feed guide has a slot in the bottom that can hold a funnel for all
+the feeds to pour and mix into, which will drain into the target glass
+or cup.
+
+![Pump/Valve Ring, Partially Completed](imgsrcs/PumpRingPartial.jpg)
+
+
+Installation
+------------
+
+    unzip TikiBot.zip
+    cd TikiBot
+    pip3 install -r requirements.txt
+
+
+Running TikiBot
+---------------
+`gui.py` is the main file to run to launch this application.  You will
+need to run it using Python 3.6 or better.
+
+     cd TikiBot/TikiBot
+     python3 gui.py
+
 
 Configuration Files
 -------------------
-`resources/tikibot_configs.yaml`: Contains all configs for passcode,
-feeds, recipes, etc.
+The file `TikiBot/resources/tikibot_configs.yaml`: Contains all configs
+for passcode, feeds, recipes, etc. for a standard set of Tiki drinks.
+On first run, if you edit any configs on the configuration screen,
+these configs will be written out to the file `$HOME/.tikibot.yaml`,
+which will be read in all future runs.
 
 In the lower right corner of the main screen is a gear icon.  This is
 the configuration menu button. If you press it, it will ask for an
@@ -49,12 +81,7 @@ administrative passcode.  The default is '8888'.  Once you enter the
 correct passcode, you will be shown the configuration screen.  From
 here, you can change the passcode (recommended!), add, edit and re-order
 feeds, add, and edit drink recipes, and shutdown or reboot the system.
-Any changes made here will be saved to the `tikibot_configs.yaml` file.
-
-
-Code Entrypoint
----------------
-`gui.py` is the main file to run to launch this application.
+Any changes made here will be saved to the `$HOME/tikibot.yaml` file.
 
 
 Screens Layout
