@@ -104,8 +104,8 @@ need to run it using Python 3.6 or better.
      python3 gui.py
 
 
-Configuration Files
--------------------
+Configuration
+-------------
 The file `TikiBot/resources/tikibot_configs.yaml`: Contains all configs
 for passcode, feeds, recipes, etc. for a standard set of Tiki drinks.
 On first run, if you edit any configs on the configuration screen,
@@ -119,6 +119,66 @@ correct passcode, you will be shown the configuration screen.  From
 here, you can change the passcode (recommended!), add, edit and re-order
 feeds, add, and edit drink recipes, and shutdown or reboot the system.
 Any changes made here will be saved to the `$HOME/.tikibot.yaml` file.
+
+
+Calibration
+-----------
+
+1. Enter the configuration screen as described above.
+
+2. In the configuration screen, the `Manage Feeds` button will show you
+    all of the feeds that the software expects, in the order that it
+    expects them.
+
+3. Take an empty cup and zero a gram scale with it on it.  Make sure the
+    scale is set to measure grams.
+
+4. Select a feed, and you will be presented with a screen that will let
+    you rename it, enable/disable it, start and stop it manually, and
+    calibrate it.
+
+5. Make sure that the feed line you selected has the expected ingredient
+    attached.
+
+6. Place the cup under the output of the feed.
+
+7. Press the `Start Feed` button to prime the feedline.
+
+8. When fluid starts pouring into the cup, press the `Stop Feed` button.
+
+9. Pressing the calibration button will show you a screen which will let
+    you calibrate the flow rate and pulse overage for that feed.
+
+10. Start with a Pulse overage of 0.2 and a Duty cycle of 100%.  Those
+    are only really needed for advanced calibration.  Select an amount
+    of 25 milliliters to dispense.  A flow rate of 12.0 is a reasonable
+    starting place.
+
+11. Empty the cup and re-zero the scale with the empty cup.
+
+12. Place the cup back under the output of the feed.
+
+13. Press `Pour` to dispense into the cup.  Wait for it to finish dispensing.
+
+14. Weigh the cup, to see how many grams of fluid were dispensed.
+
+15. Take the number of grams measured, divide it by the expected number of
+    milliliters dispensed (25mL, if you followed the above instructions),
+    then multiply that by the current `Flow` setting.  Change the `Flow`
+    to this new value.
+
+    `newflow = oldflow * dispensed / expected`
+
+    Note: You can expect viscous fluids like Sugar Syrup to have very low
+    flow rates like 2.5 mL/s.
+
+16. Repeat steps 11 to 15 a couple times until the amount dispensed is
+    within about a gram of the expected amount.
+
+17. Press the back arrow button to get back to the feeds listing screen.
+
+18. Select the next feed button and go back to step 3.  Repeat until all
+    feeds have been calibrated.
 
 
 Screens Layout
