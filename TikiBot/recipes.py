@@ -91,6 +91,11 @@ class Ingredient(object):
         return self.feed.getName()
 
     def getBarUnits(self, partial=1.0, metric=False):
+        """
+        Takes the volume of this ingredient, multiplies it by the arg `partial`,
+        and returns a tuple `(val, units)` that is the number and name of units that
+        best represents the volume in bartending units, or ml if `metric` is true.
+        """
         ml = self.milliliters * partial
         unit, div = ("dash", DASH)
         if metric:
@@ -105,6 +110,17 @@ class Ingredient(object):
         return (val, unit)
 
     def fractionalBarUnits(self, partial=1.0, metric=False):
+        """
+        Takes the volume of this ingredient, multiplies it by the arg `partial`,
+        and returns a tuple `(wholenumber, fraction, units)` that represents the
+        volume in imperial or metric units, depending on the arg `metric`.
+        The `fraction` and `units` returned are strings, and the `wholenumber`
+        is the number of fluid units (minus the fraction).  For metric units,
+        the fraction will be an empty string "", and the `wholenumber` will
+        actually be a floating point number of milliliters, with one decimal
+        point.  For imperial units, `wholenumber` will be an integer, and the
+        `fraction` will either be a null string "", or a string like "7/8"
+        """
         val, unit = self.getBarUnits(partial, metric=metric)
         if metric:
             return (math.floor(val*10+0.5)/10.0, "", unit)
