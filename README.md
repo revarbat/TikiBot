@@ -50,18 +50,18 @@ Hardware
 --------
 This software has been tested with the following hardware:
 
-- Udoo Neo ( [source](https://www.udoo.org) )
+- Udoo Neo ( [Udoo.org](https://www.udoo.org) )
 - 7" 800x480 Touchscreen HDMI display
-- 3 Adafruit DC Motor Featherwings ( [source](https://www.adafruit.com/product/2927) )
-- 12 Small self-priming pumps ( [source](http://www.trossenrobotics.com/robotgeek-pump-small) )
-- 12 Normally Closed solonoid valves ( [source](https://www.amazon.com/dp/B007D1U64E/ref=cm_sw_r_tw_dp_x_qDVWzbPCEW4K5) )
+- 3 Adafruit DC Motor Featherwings ( [Adafruit.com](https://www.adafruit.com/product/2927) )
+- 12 Small self-priming pumps ( [TrossenRobotics.com](http://www.trossenrobotics.com/robotgeek-pump-small) )
+- 12 Normally Closed solonoid valves ( [Amazon.com](https://www.amazon.com/dp/B007D1U64E/ref=cm_sw_r_tw_dp_x_qDVWzbPCEW4K5) )
 
 Each DC Motor controller handles up to 4 feeds.  Each motor controller will
 need to have a consecutive different I2C address. You can alternately use
 the following DC motor controllers without changing any code:
 
-- Adafruit DC & Stepper Motor HAT for Raspberry Pi ( [source](https://www.adafruit.com/product/2348) )
-- Adafruit Motor/Stepper/Servo Shield for Arduino v2 ( [source](https://www.adafruit.com/product/1438) )
+- Adafruit DC & Stepper Motor HAT for Raspberry Pi ( [Adafruit.com](https://www.adafruit.com/product/2348) )
+- Adafruit Motor/Stepper/Servo Shield for Arduino v2 ( [Adafruit.com](https://www.adafruit.com/product/1438) )
 
 It should be trivial to use a Raspberry Pi instead of the Udoo Neo.
 Probably the easiest configuration would be to use a Raspberry Pi
