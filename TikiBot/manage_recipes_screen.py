@@ -7,48 +7,62 @@ import math
 import operator
 from recipes import Recipe, type_icons
 from select_screen import SelectScreen
-from recipe_edit_screen import RecipeEditScreen
 from alpha_screen import AlphaScreen
+from recipe_edit_screen import RecipeEditScreen
+from list_screen import ListScreen
 
 
-class ManageRecipesScreen(SelectScreen):
+class ManageRecipesScreen(ListScreen):
     def __init__(self, master):
-        self.master = master
-        self.cols = 3
-        button_configs = self._calc_buttons()
-        super(ManageRecipesScreen, self).__init__(master, button_configs, labeltext="Select a recipe to edit:", cols=self.cols)
+        super(ManageRecipesScreen, self).__init__(
+            master,
+            self._get_items,
+            label_text="Select a Recipe to manage:",
+            add_cb=self.item_add,
+            del_cb=self.item_del,
+            edit_cb=self.item_edit,
+        )
 
-    def _calc_buttons(self):
-        items = Recipe.getAll()
-        button_configs = [
-            {"name": item.getName()}
-            for item in sorted(items, key=operator.attrgetter('name'))
+    def _get_items(self):
+        return [
+            {
+                "name": recipe.getName(),
+                "data": recipe,
+            }
+            for recipe in sorted(Recipe.getAll(), key=operator.attrgetter('name'))
         ]
-        self.cols = max(2, math.ceil(len(button_configs)/7))
-        return button_configs
 
     def activate(self):
-        button_configs = self._calc_buttons()
-        self.update_buttons(button_configs, self.cols)
+        self.update_listbox()
 
-    def handle_button_select(self, name):
-        recipe = Recipe.getByName(name)
-        self.master.screen_push(RecipeEditScreen(self.master, recipe))
-
-    def handle_button_new(self):
+    def item_add(self):
         try:
             for n in range(99):
                 name = "Recipe %d" % (n+1)
                 Recipe.getByName(name)
         except KeyError:
             pass
-        self.master.screen_push(AlphaScreen(self.master, label="Name for New Recipe:", defval=name, callback=self._new_recipe_finish))
+        self.master.screen_push(AlphaScreen(self.master, label="Name for New Recipe:", defval=name, callback=self._item_add_finish))
 
-    def _new_recipe_finish(self, name):
+    def _item_add_finish(self, name):
         for typ in type_icons.keys():
             break
         recipe = Recipe(typ, name)
+        self.master.save_configs()
+        self.update_listbox()
         self.master.screen_pop()
         self.master.screen_push(RecipeEditScreen(self.master, recipe))
 
+    def item_del(self, idx, txt, recipe):
+        self.sel_recipe = recipe
+        self.master.screen_push(SelectScreen(self.master, ["Confirm"], labeltext='Delete the recipe "%s"?' % txt, callback=self._item_del_finish))
+
+    def _item_del_finish(self, confirm):
+        if confirm == "Confirm":
+            self.sel_recipe.delete_recipe()
+            self.master.save_configs()
+        self.master.screen_pop()
+
+    def item_edit(self, idx, txt, recipe):
+        self.master.screen_push(RecipeEditScreen(self.master, recipe))
 

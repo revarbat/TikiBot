@@ -6,10 +6,12 @@ except ImportError:  # Python 3
 import math
 import operator
 from feeds import SupplyFeed
+from recipes import Recipe
 from select_screen import SelectScreen
 from alpha_screen import AlphaScreen
 from feed_edit_screen import FeedEditScreen
 from list_screen import ListScreen
+from notify_screen import NotifyScreen
 
 
 class ManageFeedsScreen(ListScreen):
@@ -45,7 +47,7 @@ class ManageFeedsScreen(ListScreen):
                 SupplyFeed.getByName(name)
         except KeyError:
             pass
-        self.master.screen_push(AlphaScreen(self.master, label="Name for New Feed:", defval=name, callback=self._new_feed_finish))
+        self.master.screen_push(AlphaScreen(self.master, label="Name for New Feed:", defval=name, callback=self._item_add_finish))
 
     def _item_add_finish(self, name):
         flowrate = 14.2
@@ -60,8 +62,18 @@ class ManageFeedsScreen(ListScreen):
         self.master.screen_push(FeedEditScreen(self.master, feed))
 
     def item_del(self, idx, txt, feed):
-        feed.delete_feed()
-        self.master.save_configs()
+        self.sel_feed = feed
+        recipes = Recipe.getRecipesByFeed(feed)
+        if recipes:
+            self.master.screen_push(NotifyScreen(self.master, text="That feed is currently in use by one or more recipes."))
+        else:
+            self.master.screen_push(SelectScreen(self.master, ["Confirm"], labeltext='Delete feed "%s"?' % txt, callback=self._item_del_finish))
+
+    def _item_del_finish(self, confirm):
+        if confirm == "Confirm":
+            self.sel_feed.delete_feed()
+            self.master.save_configs()
+        self.master.screen_pop()
 
     def item_edit(self, idx, txt, feed):
         self.master.screen_push(FeedEditScreen(self.master, feed))

@@ -212,10 +212,9 @@ class Recipe(object):
         Recipe.recipes[name] = self
         for ingr_data in ingredients:
             ingr = Ingredient.fromArray(ingr_data)
-            feedname = ingr.feed.getName()
-            if feedname not in Recipe.by_feed:
-                Recipe.by_feed[feedname] = []
-            Recipe.by_feed[feedname].append(self)
+            if ingr.feed not in Recipe.by_feed:
+                Recipe.by_feed[ingr.feed] = []
+            Recipe.by_feed[ingr.feed].append(self)
             self.ingredients.append(ingr)
 
     @classmethod
@@ -273,10 +272,10 @@ class Recipe(object):
         return sorted(recipe_list, key=operator.attrgetter('name'))
 
     @classmethod
-    def getRecipesByFeed(cls, name):
-        if name not in cls.by_feed:
+    def getRecipesByFeed(cls, feed):
+        if feed not in cls.by_feed:
             return []
-        recipe_list = cls.by_feed[name]
+        recipe_list = cls.by_feed[feed]
         return sorted(recipe_list, key=operator.attrgetter('name'))
 
     @classmethod
@@ -307,10 +306,9 @@ class Recipe(object):
         if not Recipe.recipe_types[self.type_]:
             del Recipe.recipe_types[self.type_]
         for ingr in self.ingredients:
-            feedname = ingr.feed.getName()
-            Recipe.by_feed[feedname].remove(self)
-            if not Recipe.by_feed[feedname]:
-                del Recipe.by_feed[feedname]
+            Recipe.by_feed[ingr.feed].remove(self)
+            if not Recipe.by_feed[ingr.feed]:
+                del Recipe.by_feed[ingr.feed]
 
     def rename(self, newname):
         del Recipe.recipes[self.name]
@@ -329,8 +327,11 @@ class Recipe(object):
         self.type_ = newtype
         Recipe.recipe_types[newtype].append(self)
 
-    def add(self, feedname, ml):
+    def add_ingredient(self, feedname, ml):
         feed = SupplyFeed.getByName(feedname)
+        if feed not in Recipe.by_feed:
+            Recipe.by_feed[feed] = []
+        Recipe.by_feed[feed].append(self)
         self.ingredients.append(Ingredient(feed, ml))
         return self
 

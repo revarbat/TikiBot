@@ -13,6 +13,7 @@ class ByIngredientScreen(SelectScreen):
         super(ByIngredientScreen, self).__init__(master, feednames, labeltext="Find drinks by ingredient:", cols=cols)
 
     def handle_button_select(self, item):
-        recipes = Recipe.getRecipesByFeed(item)
+        feed = SupplyFeed.getByName(item)
+        recipes = Recipe.getRecipesByFeed(feed)
         self.master.screen_push(RecipeScreen(self.master, recipes, "Select a drink with %s:" % item))
 

@@ -9,22 +9,22 @@ from select_screen import SelectScreen
 
 class ListScreen(Frame):
     def __init__(
-        self,
-        master,
-        items_cb,
-        label_text="",
-        add_cb=None,
-        del_cb=None,
-        edit_cb=None,
-        raise_cb=None,
-        lower_cb=None,
-        add_lbl="\u2795",
-        del_lbl="\u2796",
-        edit_lbl="\u270e",
-        raise_lbl="\u2b06",
-        lower_lbl="\u2b07",
-        extra_btns=None
-    ):
+            self,
+            master,
+            items_cb,
+            label_text="",
+            add_cb=None,
+            del_cb=None,
+            edit_cb=None,
+            raise_cb=None,
+            lower_cb=None,
+            add_lbl="\u2795",
+            del_lbl="\u2796",
+            edit_lbl="\u270e",
+            raise_lbl="\u2b06",
+            lower_lbl="\u2b07",
+            extra_btns=None
+        ):
         super(ListScreen, self).__init__(master)
         self.master = master
         self.items_cb = items_cb
@@ -175,13 +175,8 @@ class ListScreen(Frame):
         self.update_listbox()
 
     def handle_button_del(self):
-        self.master.screen_push(SelectScreen(self.master, ["Confirm"], labeltext='Delete "%s"?' % self.sel_txt, callback=self.del_step1))
-
-    def del_step1(self, confirm):
-        if confirm == "Confirm":
-            self.del_cb(self.sel_idx, self.sel_txt, self.sel_dat)
-            self.update_listbox()
-        self.master.screen_pop()
+        self.del_cb(self.sel_idx, self.sel_txt, self.sel_dat)
+        self.update_listbox()
 
     def handle_button_edit(self):
         self.edit_cb(self.sel_idx, self.sel_txt, self.sel_dat)
