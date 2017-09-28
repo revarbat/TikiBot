@@ -19,25 +19,18 @@ class FeedEditScreen(Frame):
         self.avail.set(1 if feed.avail else 0)
 
         self.lbl = Label(self, text="Feed #%d: %s" % (feed.motor_num, feed.getName()))
-        renamebtn = RectButton(self, text="Rename Feed", width=150, command=self.handle_button_rename)
-        orderdnbtn = RectButton(self, text="Incr Motor #", width=150, command=self.handle_button_feed_orderdn)
-        orderupbtn = RectButton(self, text="Decr Motor #", width=150, command=self.handle_button_feed_orderup)
-        delbtn = RectButton(self, text="Delete Feed", width=150, command=self.handle_button_feed_del)
         enbtn = TouchCheckbox(self, text="Available", variable=self.avail, command=self.handle_button_enable)
+        renamebtn = RectButton(self, text="Rename Feed", width=150, command=self.handle_button_rename)
         calibbtn = RectButton(self, text="Calibration", width=150, command=self.handle_button_calib)
         self.feedbtn = RectButton(self, text="Start Feed", width=150, command=self.handle_button_feed)
         backbtn = RectButton(self, text="\u23ce", width=120, command=self.handle_button_back)
 
         self.lbl.grid(column=1, row=1, columnspan=2, pady=10, sticky=E+W)
-        renamebtn.grid(column=1, row=3, padx=20, pady=10, sticky=E+W)
-        orderdnbtn.grid(column=1, row=4, padx=20, pady=10, sticky=E+W)
-        orderupbtn.grid(column=1, row=5, padx=20, pady=10, sticky=E+W)
-        delbtn.grid(column=1, row=6, padx=20, pady=10, sticky=E+W)
-
-        enbtn.grid(column=2, row=3, padx=20, pady=10)
-        calibbtn.grid(column=2, row=4, padx=20, pady=10, sticky=E+W)
-        self.feedbtn.grid(column=2, row=5, padx=20, pady=10, sticky=E+W)
-        backbtn.grid(column=2, row=9, columnspan=2, padx=20, pady=10, sticky=S+E)
+        enbtn.grid(column=1, row=3, padx=20, pady=10)
+        renamebtn.grid(column=1, row=4, padx=20, pady=10, sticky=E+W)
+        calibbtn.grid(column=1, row=5, padx=20, pady=10, sticky=E+W)
+        self.feedbtn.grid(column=1, row=6, padx=20, pady=10, sticky=E+W)
+        backbtn.grid(column=1, row=9, columnspan=3, padx=20, pady=10, sticky=S+E)
 
         self.columnconfigure(0, weight=1)
         self.columnconfigure(3, weight=1)
@@ -75,23 +68,4 @@ class FeedEditScreen(Frame):
         self.lbl.config(text="Feed #%d: %s" % (self.feed.motor_num, self.feed.getName()))
         self.master.save_configs()
         self.master.screen_pop()
-
-    def handle_button_feed_orderup(self):
-        self.feed.reorderUp()
-        self.lbl.config(text="Feed #%d: %s" % (self.feed.motor_num, self.feed.getName()))
-
-    def handle_button_feed_orderdn(self):
-        self.feed.reorderDown()
-        self.lbl.config(text="Feed #%d: %s" % (self.feed.motor_num, self.feed.getName()))
-
-    def handle_button_feed_del(self):
-        self.master.screen_push(SelectScreen(self.master, ["Confirm"], labeltext="Are you sure you want to delete this feed?", callback=self.feed_delete_complete))
-
-    def feed_delete_complete(self, confirm):
-        if confirm == "Confirm":
-            self.feed.delete_feed()
-            self.master.save_configs()
-            self.master.screen_pop()
-        self.master.screen_pop()
-
 

@@ -199,10 +199,13 @@ subclass of another screen class, the base class is in (parens).
                 "Pour" DispensingScreen
         "⚙" LockScreen
             ConfigScreen
-                "Manage Feeds" ManageFeedsScreen(SelectScreen)
+                "Manage Feeds" ManageFeedsScreen(ListScreen)
                     "+" AlphaScreen
-                    FeedScreen
-                        "Delete Feed" SelectScreen
+			"Select" FeedEditScreen
+			    "Rename Feed" AlphaScreen
+			    "Calibrate" CalibScreen
+		    "-" SelectScreen
+		    "✎" FeedEditScreen
                         "Rename Feed" AlphaScreen
                         "Calibrate" CalibScreen
                 "Manage Recipes" ManageRecipesScreen(SelectScreen)

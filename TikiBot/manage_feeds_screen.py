@@ -9,37 +9,36 @@ from feeds import SupplyFeed
 from select_screen import SelectScreen
 from alpha_screen import AlphaScreen
 from feed_edit_screen import FeedEditScreen
+from list_screen import ListScreen
 
 
-class ManageFeedsScreen(SelectScreen):
+class ManageFeedsScreen(ListScreen):
     def __init__(self, master):
-        self.master = master
-        self.cols = 3
-        button_configs = self._calc_buttons()
-        super(ManageFeedsScreen, self).__init__(master, button_configs, labeltext="Select a feed to manage:", cols=self.cols)
+        super(ManageFeedsScreen, self).__init__(
+            master,
+            self._get_items,
+            label_text="Select a feed to manage:",
+            add_cb=self.item_add,
+            del_cb=self.item_del,
+            edit_cb=self.item_edit,
+            raise_cb=self.item_raise,
+            lower_cb=self.item_lower,
+        )
 
-    def _calc_buttons(self):
-        button_configs = [
+    def _get_items(self):
+        return [
             {
                 "name": "#%d %s" % (feed.motor_num, feed.getName()),
+                "data": feed,
                 "fgcolor": None if feed.avail else "#700",
-                "icon": None if feed.avail else "Disabled.gif",
-                "compound": LEFT,
-                "callback": lambda x=feed: self.handle_button_select(x),
             }
             for feed in SupplyFeed.getAllOrdered()
         ]
-        self.cols = max(2, math.ceil(len(button_configs)/7))
-        return button_configs
 
     def activate(self):
-        button_configs = self._calc_buttons()
-        self.update_buttons(button_configs, self.cols)
+        self.update_listbox()
 
-    def handle_button_select(self, feed):
-        self.master.screen_push(FeedEditScreen(self.master, feed))
-
-    def handle_button_new(self):
+    def item_add(self):
         try:
             for n in range(99):
                 name = "Feed %d" % (n+1)
@@ -48,14 +47,31 @@ class ManageFeedsScreen(SelectScreen):
             pass
         self.master.screen_push(AlphaScreen(self.master, label="Name for New Feed:", defval=name, callback=self._new_feed_finish))
 
-    def _new_feed_finish(self, name):
+    def _item_add_finish(self, name):
         flowrate = 14.2
         overage = 0.25
         for lastfeed in SupplyFeed.getAllOrdered():
             flowrate = lastfeed.flowrate
             overage = lastfeed.pulse_overage
         feed = SupplyFeed("Misc", name, flowrate=flowrate, overage=overage)
+        self.master.save_configs()
+        self.update_listbox()
         self.master.screen_pop()
         self.master.screen_push(FeedEditScreen(self.master, feed))
+
+    def item_del(self, idx, txt, feed):
+        feed.delete_feed()
+        self.master.save_configs()
+
+    def item_edit(self, idx, txt, feed):
+        self.master.screen_push(FeedEditScreen(self.master, feed))
+
+    def item_raise(self, idx, txt, feed):
+        SupplyFeed.transpose(idx-1)
+        self.master.save_configs()
+
+    def item_lower(self, idx, txt, feed):
+        SupplyFeed.transpose(idx)
+        self.master.save_configs()
 
 
