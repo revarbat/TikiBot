@@ -161,6 +161,8 @@ class SupplyFeed(object):
             del SupplyFeed.feed_types[self.type_]
         SupplyFeed.feed_order.remove(self)
         SupplyFeed.max_motor_num -= 1
+        for n, feed in enumerate(SupplyFeed.feed_order):
+            feed.motor_num = n
 
     def rename(self, newname):
         """Change the name of this SupplyFeed."""
