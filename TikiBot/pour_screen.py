@@ -1,9 +1,7 @@
 try:  # Python 2
     from Tkinter import *  # noqa
-    from tkFont import Font
 except ImportError:  # Python 3
     from tkinter import *  # noqa
-    from tkinter.font import Font
 
 from recipes import Recipe, OZ
 from rectbutton import RectButton
@@ -64,10 +62,9 @@ class PourScreen(Frame):
         partial = vol / total_vol
         self.desc.config(state=NORMAL)
         self.desc.delete(1.0, END)
-        smallfont = Font(family="Helvetica", size=12)
         self.desc.tag_config("recipe", lmargin1=3, rmargin=3, spacing1=2, spacing3=2, background="#077", foreground="white")
-        self.desc.tag_config("virgin", lmargin1=3, rmargin=3, spacing1=2, spacing3=2, background="#7f7", foreground="black", font=smallfont)
-        self.desc.tag_config("abv", lmargin1=3, rmargin=3, spacing1=2, spacing3=2, background="#ff7", foreground="black", font=smallfont)
+        self.desc.tag_config("virgin", lmargin1=3, rmargin=3, spacing1=2, spacing3=2, background="#7f7", foreground="black")
+        self.desc.tag_config("abv", lmargin1=3, rmargin=3, spacing1=2, spacing3=2, background="#ff7", foreground="black")
         self.desc.insert(END, "%s\n" % name, "recipe")
         for ing in self.recipe.ingredients:
             self.desc.insert(END, "%s\n" % ing.readableDesc(partial, metric=self.master.use_metric))
