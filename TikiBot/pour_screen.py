@@ -64,7 +64,7 @@ class PourScreen(Frame):
         partial = vol / total_vol
         self.desc.config(state=NORMAL)
         self.desc.delete(1.0, END)
-        smallfont = Font(family="Helvetica", size=16)
+        smallfont = Font(family="Helvetica", size=12)
         self.desc.tag_config("recipe", lmargin1=3, rmargin=3, spacing1=2, spacing3=2, background="#077", foreground="white")
         self.desc.tag_config("virgin", lmargin1=3, rmargin=3, spacing1=2, spacing3=2, background="#7f7", foreground="black", font=smallfont)
         self.desc.tag_config("abv", lmargin1=3, rmargin=3, spacing1=2, spacing3=2, background="#ff7", foreground="black", font=smallfont)
