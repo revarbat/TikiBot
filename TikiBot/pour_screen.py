@@ -1,7 +1,9 @@
 try:  # Python 2
     from Tkinter import *  # noqa
+    from tkFont import Font
 except ImportError:  # Python 3
     from tkinter import *  # noqa
+    from tkinter.font import Font
 
 from recipes import Recipe, OZ
 from rectbutton import RectButton
@@ -54,16 +56,27 @@ class PourScreen(Frame):
 
     def update_recipe_desc(self):
         vol = self.get_amount()
-        if self.master.use_metric:
-            partial = vol / self.recipe.totalVolume()
-        else:
-            partial = vol * OZ / self.recipe.totalVolume()
+        if not self.master.use_metric:
+            vol *= OZ
+        total_vol = self.recipe.totalVolume()
+        name = self.recipe.getName()
+        apbv = self.recipe.getAlcoholPercentByVolume()
+        partial = vol / total_vol
         self.desc.config(state=NORMAL)
         self.desc.delete(1.0, END)
+        smallfont = Font(family="Helvetica", size=16)
         self.desc.tag_config("recipe", lmargin1=3, rmargin=3, spacing1=2, spacing3=2, background="#077", foreground="white")
-        self.desc.insert(END, "%s\n" % self.recipe.getName(), "recipe")
+        self.desc.tag_config("virgin", lmargin1=3, rmargin=3, spacing1=2, spacing3=2, background="#7f7", foreground="black", font=smallfont)
+        self.desc.tag_config("abv", lmargin1=3, rmargin=3, spacing1=2, spacing3=2, background="#ff7", foreground="black", font=smallfont)
+        self.desc.insert(END, "%s\n" % name, "recipe")
         for ing in self.recipe.ingredients:
             self.desc.insert(END, "%s\n" % ing.readableDesc(partial, metric=self.master.use_metric))
+        self.desc.insert(END, "\n")
+        if apbv < 0.1:
+            self.desc.insert(END, "Non-Alcoholic\n", "virgin")
+        else:
+            alc_warn = "\u2620" * int(vol*apbv/100.0/14.0)
+            self.desc.insert(END, "%.1f%% Alcohol by Volume  %s\n" % (apbv, alc_warn), "abv")
         self.desc.config(state=DISABLED)
         self.master.update()
 

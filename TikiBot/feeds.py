@@ -22,7 +22,7 @@ class SupplyFeed(object):
     feeds = {}
     feed_types = {}
 
-    def __init__(self, type_, name, flowrate=14.2, overage=0.25, avail=True):
+    def __init__(self, type_, name, flowrate=14.2, overage=0.25, proof=0, avail=True):
         if type_ not in SupplyFeed.feed_types:
             SupplyFeed.feed_types[type_] = []
         SupplyFeed.feed_types[type_].append(self)
@@ -30,10 +30,11 @@ class SupplyFeed(object):
         self.name = name
         self.flowrate = flowrate
         self.pulse_overage = overage
+        self.proof = proof
         self.flowing = False
         self.avail = avail
         self.motor_num = SupplyFeed.max_motor_num
-        self.motor = None  # Defer instantiation for X-platform debugging
+        self.motor = None  # Defer instantiation for cross-platform debugging
         SupplyFeed.max_motor_num += 1
         SupplyFeed.feeds[name] = self
         SupplyFeed.feed_order.append(self)
@@ -52,6 +53,7 @@ class SupplyFeed(object):
                     name,
                     flowrate=data.get('flowrate', 14.2),
                     overage=data.get('overage', 0.25),
+                    proof=data.get('proof', 0),
                     avail=data.get('available', True)
                 )
 
@@ -70,6 +72,7 @@ class SupplyFeed(object):
                 'type': self.type_,
                 'flowrate': self.flowrate,
                 'overage': self.pulse_overage,
+                'proof': self.proof,
                 'available': self.avail,
             }
         }

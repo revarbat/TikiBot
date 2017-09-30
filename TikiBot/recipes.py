@@ -341,6 +341,15 @@ class Recipe(object):
                 return False
         return True
 
+    def getAlcoholPercentByVolume(self):
+        vol = 0.0
+        alc_vol = 0.0
+        for ingr in self.ingredients:
+            ml = ingr.milliliters
+            vol += ml
+            alc_vol += ml * (ingr.feed.proof / 200.0)
+        return 100.0 * alc_vol / vol
+
     def totalVolume(self):
         vol = 0.0
         for ingr in self.ingredients:

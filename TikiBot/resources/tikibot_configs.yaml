@@ -1,17 +1,21 @@
 conf_version: 1.0.0
 feeds:
-- Meyer's Dark Rum: {available: true, flowrate: 12.5, overage: 0.04, type: Rums}
-- Appleton's Gold Rum: {available: true, flowrate: 12.5, overage: 0.04, type: Rums}
-- Meyer's Silver Rum: {available: true, flowrate: 12.5, overage: 0.04, type: Rums}
-- Lemonheart 151 Rum: {available: true, flowrate: 12.5, overage: 0.04, type: Rums}
-- Lime Juice: {available: true, flowrate: 12.7, overage: 0.04, type: Juices}
-- Lemon Juice: {available: true, flowrate: 12.8, overage: 0.04, type: Juices}
-- Orange Juice: {available: true, flowrate: 12.8, overage: 0.04, type: Juices}
-- Pineapple Juice: {available: true, flowrate: 12.8, overage: 0.04, type: Juices}
-- Passion Fruit Syrup: {available: true, flowrate: 12.2, overage: 0.04, type: Flavorings}
-- Sugar Syrup: {available: true, flowrate: 2.7, overage: 0.02, type: Flavorings}
-- Angostura Bitters: {available: true, flowrate: 4.1, overage: 0.2, type: Flavorings}
-- Grenadine: {available: true, flowrate: 13.1, overage: 0.03, type: Flavorings}
+- Meyer's Dark Rum: {available: true, flowrate: 12.5, overage: 0.04, proof: 80, type: Rums}
+- Appleton's Gold Rum: {available: true, flowrate: 12.5, overage: 0.04, proof: 80,
+    type: Rums}
+- Meyer's Silver Rum: {available: true, flowrate: 12.5, overage: 0.04, proof: 80,
+    type: Rums}
+- Lemonheart 151 Rum: {available: true, flowrate: 12.5, overage: 0.04, proof: 151,
+    type: Rums}
+- Lime Juice: {available: true, flowrate: 12.7, overage: 0.04, proof: 0, type: Juices}
+- Lemon Juice: {available: true, flowrate: 12.8, overage: 0.04, proof: 0, type: Juices}
+- Orange Juice: {available: true, flowrate: 12.8, overage: 0.04, proof: 0, type: Juices}
+- Pineapple Juice: {available: true, flowrate: 12.8, overage: 0.04, proof: 0, type: Juices}
+- Passion Fruit Syrup: {available: true, flowrate: 12.2, overage: 0.04, proof: 0,
+    type: Flavorings}
+- Sugar Syrup: {available: true, flowrate: 2.7, overage: 0.02, proof: 0, type: Flavorings}
+- Angostura Bitters: {available: true, flowrate: 4.1, overage: 0.2, proof: 0, type: Flavorings}
+- Grenadine: {available: true, flowrate: 13.1, overage: 0.03, proof: 0, type: Flavorings}
 passcode: '8888'
 recipes:
   Beachcomber's Gold:
