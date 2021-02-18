@@ -4,7 +4,7 @@ Adafruit-PCA9685==1.0.1
 Adafruit-PureIO==0.2.1
 packaging==16.8
 Pillow==7.1.0
-PyYAML==3.12
+PyYAML==5.1
 six==1.10.0
 virtualenv==15.1.0
 
