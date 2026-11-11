@@ -6,5 +6,5 @@ packaging==16.8
 Pillow==13.0.0
 PyYAML==5.4
 six==1.10.0
-virtualenv==20.36.1
+virtualenv==21.7.11
 
